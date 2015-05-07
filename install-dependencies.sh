@@ -2,6 +2,7 @@
 
 function install_cmake()
 {
+	rm -rf cmake-3.2.1;
 	tar zxvf cmake-3.2.1.tar.gz && cd cmake-3.2.1;
 
 	if [ $# == 1 ]
@@ -16,7 +17,7 @@ function install_cmake()
 			echo "wrong commands";
 	fi
 
-	gmake && gmake install
+	make && make install
 	PATH=$1/bin:$PATH;
 	echo $PATH;
 	export PATH=$1/bin:$PATH;
@@ -26,6 +27,7 @@ function install_cmake()
 
 function install_czmq()
 {
+	rm -rf czmq-3.0.0;
 	tar zxvf czmq-3.0.0-rc1.tar.gz && cd czmq-3.0.0;
 	
 	if [ $# == 2 ]
@@ -51,6 +53,7 @@ function install_czmq()
 
 function install_gflags()
 {
+	rm -rf gflags-2.1.1;
 	tar zxvf gflags-2.1.1.tar.gz && cd gflags-2.1.1;
 	mkdir build && cd build;
 
@@ -73,6 +76,7 @@ function install_gflags()
 
 function install_glog()
 {
+	rm -rf glog-0.3.3;
 	tar zxvf glog-0.3.3.tar.gz && cd glog-0.3.3;
 
 	if [ $# == 1 ]
@@ -94,6 +98,7 @@ function install_glog()
 
 function install_lmdb()
 {
+	rm -rf mdb-mdb;
 	tar zxvf lmdb-0.9.10.tar.gz && cd mdb-mdb/libraries/liblmdb;
 
 	if [ $# == 1 ]
@@ -114,6 +119,7 @@ function install_lmdb()
 
 function install_openblas()
 {
+	rm -rf OpenBLAS-develop;
 	unzip OpenBLAS.zip && cd OpenBLAS-develop;
 
 	make;
@@ -134,6 +140,7 @@ function install_openblas()
 
 function install_opencv()
 {
+	rm -rf opencv-2.4.10;
 	unzip opencv-2.4.10.zip && cd opencv-2.4.10;
 	
 	if [ $# == 1 ]
@@ -155,6 +162,7 @@ function install_opencv()
 
 function install_protobuf()
 {
+	rm -rf protobuf-2.6.0;
 	tar zxvf protobuf-2.6.0.tar.gz && cd protobuf-2.6.0;
 
 	if [ $# == 1 ]
@@ -176,6 +184,7 @@ function install_protobuf()
 
 function install_zeromq()
 {
+	rm -rf zeromq-3.2.2;
 	tar zxvf zeromq-3.2.2.tar.gz && cd zeromq-3.2.2;
 
 	if [ $# == 1 ]
