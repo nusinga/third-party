@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 function install_cmake()
 {
@@ -197,7 +197,6 @@ function install_zeromq()
 
 while [ $# != 0 ]
 do
-	echo "arg 1 is $1";
 	case $1 in
 	"cmake")
 		echo "install cmake";
