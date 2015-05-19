@@ -60,7 +60,7 @@ function install_gflags()
 	if [ $# == 1 ]
 		then
 			echo "install gflags in $1"
-			cmake .. -DCMAKE_INSTALL_PREFIX=$1;
+			cmake .. -DCMAKE_INSTALL_PREFIX=$1 -DBUILD_SHARED_LIBS=ON;
 		elif [ $# == 0 ]
 		then 
 			echo "install gflags in default path";
