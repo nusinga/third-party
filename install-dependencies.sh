@@ -252,13 +252,42 @@ function install_zeromq()
 			echo "wrong commands";
 	fi
 	
-	make && make install
+	make && make install;
 	if [ $? -ne 0 ]
 	then
 		cd ..;
 		return -1;
 	fi
 	cd ..;
+	return 0;
+}
+
+function install_zookeeper()
+{
+	rm -rf zookeeper-3.4.6;
+	tar zxvf zookeeper-3.4.6.tar.gz;
+	cd zookeeper-3.4.6/src/c;
+
+	if [ $# == 1 ]
+		then
+			echo "install zookeeper in $1";
+			./configure --prefix=$1;
+		elif [ $# == 0 ]
+		then
+			echo "install zookeeper in default path";
+			./configure;
+		else 
+			echo "wrong commands";
+	fi
+
+	make && make install;
+	if [ $? -ne 0 ]
+	then
+		cd ../../..;
+		return -1;
+	fi
+
+	cd ../../..;
 	return 0;
 }
 
@@ -466,6 +495,27 @@ do
 			shift
 		fi
 		;;
+	"zookeeper")
+		echo "install zookeeper";
+		if [[ $2 == */* ]];then
+			install_zookeeper $2;
+		    if [ $? -ne 0 ] 
+		    then
+		        echo "ERROR during zookeeper installation" ;
+		        exit;
+		    fi  
+			shift
+			shift
+		else
+			install_zookeeper;
+		    if [ $? -ne 0 ] 
+		    then
+		        echo "ERROR during zookeeper installation" ;
+		        exit;
+		    fi  
+			shift
+		fi
+		;;
 	"all")
 		echo "install all dependencies";
 		if [[ $2 == */* ]];then
@@ -523,6 +573,12 @@ do
 		        echo "ERROR during protobuf installation" ;
 		        exit;
 		    fi  
+			install_zookeeper $2;
+			if [ $? -ne 0 ]
+			then
+				echo "ERROR during zookeeper installation" ;
+				exit;
+			fi
 			shift
 			shift
 		else
@@ -580,6 +636,12 @@ do
 		        echo "ERROR during protobuf installation" ;
 		        exit;
 		    fi  
+			install_zookeeper;
+			if [ $? -ne 0 ]
+			then
+				echo "ERROR during zookeeper installation" ;
+				exit;
+			fi
 			shift
 		fi
 		;;
